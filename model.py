@@ -21,13 +21,13 @@ class Pack(BaseModel):
     rates: list[list[RarityRate]]
     god_rates: list[list[RarityRate]]
 
-    def get_rarity_rate(self, rarity_rates: list[RarityRate], rarity: Rarity):
+    def get_rarity_rate(self, rarity_rates: list[RarityRate], rarity: Rarity) -> float:
         try:
             return next(elt.rate for elt in rarity_rates if elt.rarity == rarity) * 0.01
         except StopIteration:
             return 0.0
 
-    def get_booster_rate(self, rates: list[list[RarityRate]], rarity: Rarity):
+    def get_booster_rate(self, rates: list[list[RarityRate]], rarity: Rarity) -> float:
         win_rate = 0.0
         previous_win_rate = 0.0
         for card_rates in rates:
@@ -38,7 +38,7 @@ class Pack(BaseModel):
         return win_rate * 100.0
 
 
-    def get_rate(self, rarity: Rarity):
+    def get_rate(self, rarity: Rarity) -> float:
         god_rate = self.god_pack_rate * 0.01 * self.get_booster_rate(self.god_rates, rarity)
         normal_rate = (1.0 - self.god_pack_rate * 0.01) * self.get_booster_rate(self.rates, rarity)
         return god_rate + normal_rate
@@ -48,10 +48,10 @@ class CardSet(BaseModel):
     name: str
     packs: list[Pack]
 
-    def get_pack(self, pack_name: str):
+    def get_pack(self, pack_name: str) -> Pack:
         return next(elt for elt in self.packs if elt.name == pack_name)
 
-    def get_rate(self, pack_name: str, rarity: Rarity):
+    def get_rate(self, pack_name: str, rarity: Rarity) -> float:
         pack = self.get_pack(pack_name)
         return pack.get_rate(rarity)
 
@@ -60,9 +60,16 @@ class CardSet(BaseModel):
 class PullRates(BaseModel):
     card_sets: list[CardSet]
 
-    def get_card_set(self, card_set_name: str):
+    def get_card_set(self, card_set_name: str) -> CardSet:
         return next(elt for elt in self.card_sets if elt.name == card_set_name)
 
-    def get_rate(self, card_set_name: str, pack_name: str, rarity: Rarity):
+    def get_rate_for_pack(self, card_set_name: str, pack_name: str, rarity: Rarity) -> float:
         card_set = self.get_card_set(card_set_name)
         return card_set.get_rate(pack_name, rarity)
+    
+    def get_rate_for_card_set(self, card_set_name: str, rarity: Rarity) -> float:
+        card_set = self.get_card_set(card_set_name)
+        rates = 0.0
+        for pack in card_set.packs:
+            rates += card_set.get_rate(pack.name, rarity)
+        return rates / len(card_set.packs)
