@@ -1,10 +1,10 @@
 {
     "card_sets": [
         {
-            "name": "genetic_apex",
+            "name": "GENETIC_APEX",
             "packs": [
                 {
-                    "name": "charizard",
+                    "name": "CHARIZARD",
                     "god_pack_rate": 0.05,
                     "rates": [
                         [
@@ -180,7 +180,7 @@
                     ]
                 },
                 {
-                    "name": "mewtwo",
+                    "name": "MEWTWO",
                     "god_pack_rate": 0.05,
                     "rates": [
                         [
@@ -356,7 +356,7 @@
                     ]
                 },
                 {
-                    "name": "pikachu",
+                    "name": "PIKACHU",
                     "god_pack_rate": 0.05,
                     "rates": [
                         [

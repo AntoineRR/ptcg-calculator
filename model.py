@@ -1,5 +1,6 @@
 from enum import Enum
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
 
 class Rarity(Enum):
     ONE = "ONE"
@@ -11,12 +12,28 @@ class Rarity(Enum):
     THREE_STARS = "THREE_STARS"
     CROWN = "CROWN"
 
+
+class PackName(Enum):
+    pass
+
+
+class GeneticApexPackName(PackName):
+    CHARIZARD = "CHARIZARD"
+    MEWTWO = "MEWTWO"
+    PIKACHU = "PIKACHU"
+
+
+class CardSetName(Enum):
+    GENETIC_APEX = "GENETIC_APEX"
+
+
 class RarityRate(BaseModel):
     rarity: Rarity
-    rate: float = 0.0
+    rate: float = Field(ge=0.0, le=100.0, default=0.0)
+
 
 class Pack(BaseModel):
-    name: str
+    name: GeneticApexPackName
     god_pack_rate: float
     rates: list[list[RarityRate]]
     god_rates: list[list[RarityRate]]
@@ -32,44 +49,50 @@ class Pack(BaseModel):
         previous_win_rate = 0.0
         for card_rates in rates:
             current_win_rate = self.get_rarity_rate(card_rates, rarity)
-            win_rate += (1.0 - previous_win_rate) * current_win_rate 
+            win_rate += (1.0 - previous_win_rate) * current_win_rate
             previous_win_rate = win_rate
 
         return win_rate * 100.0
 
-
     def get_rate(self, rarity: Rarity) -> float:
-        god_rate = self.god_pack_rate * 0.01 * self.get_booster_rate(self.god_rates, rarity)
-        normal_rate = (1.0 - self.god_pack_rate * 0.01) * self.get_booster_rate(self.rates, rarity)
+        god_rate = (
+            self.god_pack_rate * 0.01 * self.get_booster_rate(self.god_rates, rarity)
+        )
+        normal_rate = (1.0 - self.god_pack_rate * 0.01) * self.get_booster_rate(
+            self.rates, rarity
+        )
         return god_rate + normal_rate
 
 
 class CardSet(BaseModel):
-    name: str
+    name: CardSetName
     packs: list[Pack]
 
-    def get_pack(self, pack_name: str) -> Pack:
+    def get_pack(self, pack_name: PackName) -> Pack:
         return next(elt for elt in self.packs if elt.name == pack_name)
 
-    def get_rate(self, pack_name: str, rarity: Rarity) -> float:
-        pack = self.get_pack(pack_name)
-        return pack.get_rate(rarity)
+    def get_rate_for_pack(self, pack_name: PackName, rarity: Rarity) -> float:
+        return self.get_pack(pack_name).get_rate(rarity)
 
+    def get_rate(self, rarity: Rarity) -> float:
+        rates = 0.0
+        for pack in self.packs:
+            rates += self.get_rate_for_pack(pack.name, rarity)
+        return rates / len(self.packs)
 
 
 class PullRates(BaseModel):
     card_sets: list[CardSet]
 
-    def get_card_set(self, card_set_name: str) -> CardSet:
+    def get_card_set(self, card_set_name: CardSetName) -> CardSet:
         return next(elt for elt in self.card_sets if elt.name == card_set_name)
 
-    def get_rate_for_pack(self, card_set_name: str, pack_name: str, rarity: Rarity) -> float:
-        card_set = self.get_card_set(card_set_name)
-        return card_set.get_rate(pack_name, rarity)
-    
-    def get_rate_for_card_set(self, card_set_name: str, rarity: Rarity) -> float:
-        card_set = self.get_card_set(card_set_name)
-        rates = 0.0
-        for pack in card_set.packs:
-            rates += card_set.get_rate(pack.name, rarity)
-        return rates / len(card_set.packs)
+    def get_rate_for_pack(
+        self, card_set_name: CardSetName, pack_name: PackName, rarity: Rarity
+    ) -> float:
+        return self.get_card_set(card_set_name).get_rate_for_pack(pack_name, rarity)
+
+    def get_rate_for_card_set(
+        self, card_set_name: CardSetName, rarity: Rarity
+    ) -> float:
+        return self.get_card_set(card_set_name).get_rate(rarity)
