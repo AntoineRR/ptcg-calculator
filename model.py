@@ -45,16 +45,18 @@ class Pack(BaseModel):
             return 0.0
 
     def get_booster_rate(self, rates: list[list[RarityRate]], rarity: Rarity) -> float:
-        win_rate = 0.0
-        previous_win_rate = 0.0
+        """
+        Return the probability of pulling at least one card of the specified rarity
+        """
+        zero_pull_rate = 1.0
         for card_rates in rates:
-            current_win_rate = self.get_rarity_rate(card_rates, rarity)
-            win_rate += (1.0 - previous_win_rate) * current_win_rate
-            previous_win_rate = win_rate
-
-        return win_rate * 100.0
+            zero_pull_rate *= 1.0 - self.get_rarity_rate(card_rates, rarity)
+        return 1.0 - zero_pull_rate
 
     def get_rate(self, rarity: Rarity) -> float:
+        """
+        Return the probability of pulling at least one card of the specified rarity from one booster
+        """
         god_rate = (
             self.god_pack_rate * 0.01 * self.get_booster_rate(self.god_rates, rarity)
         )
@@ -96,3 +98,13 @@ class PullRates(BaseModel):
         self, card_set_name: CardSetName, rarity: Rarity
     ) -> float:
         return self.get_card_set(card_set_name).get_rate(rarity)
+
+    def get_rate_for_card_set_for_n_boosters(
+        self, card_set_name: CardSetName, rarity: Rarity, n_booster: int
+    ) -> float:
+        """
+        Probability of getting at least one card of specified rarity from n boosters
+        """
+        p = self.get_rate_for_card_set(card_set_name, rarity)
+        # We now have a Bernoulli law to apply
+        return 1.0 - pow(1.0 - p, n_booster)
