@@ -8,25 +8,21 @@ def main():
         pull_rates = PullRates.model_validate(raw_pull_rates)
 
     card_set = CardSetName.GENETIC_APEX
-    n_booster = 100
+    n_booster = 137
 
     for rarity in Rarity:
-        pull_rate = pull_rates.get_rates_for_card_set(card_set, rarity)
-
         print(
-            f"Here are your chances of pulling cards of rarity {rarity.value} after opening one booster from {card_set.value}:"
+            f"Here are your chances of pulling cards of rarity {rarity.value} after opening {n_booster} boosters from {card_set.value}:"
         )
-        for n, value in pull_rate.items():
-            print(f"{round(value * 100.0, 2)}% to pull {n}")
-
-        pull_rate_n = (
-            pull_rates.get_rate_for_card_set_for_n_boosters(card_set, rarity, n_booster)
-            * 100.0
-        )
-        print(
-            f"Here are your chances of pulling at least one card of rarity {rarity.value} after opening {n_booster} boosters from {card_set.value}:"
-        )
-        print(f"{round(pull_rate_n, 2)}%")
+        for m_card in range(40):
+            pull_rate_n = (
+                pull_rates.get_rate_for_m_card_set_for_n_boosters(
+                    card_set, rarity, n_booster, m_card
+                )
+                * 100.0
+            )
+            if pull_rate_n > 0.1:
+                print(f"{round(pull_rate_n, 2)}% to pull {m_card}")
 
 
 if __name__ == "__main__":

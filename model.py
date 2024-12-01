@@ -1,5 +1,6 @@
 from enum import Enum
 import itertools
+import math
 from pydantic import BaseModel, Field
 
 
@@ -135,14 +136,23 @@ class PullRates(BaseModel):
     ) -> dict[int, float]:
         return self.get_card_set(card_set_name).get_rates(rarity)
 
-    def get_rate_for_card_set_for_n_boosters(
-        self, card_set_name: CardSetName, rarity: Rarity, n_booster: int
+    def get_rate_for_m_card_set_for_n_boosters(
+        self, card_set_name: CardSetName, rarity: Rarity, n_booster: int, m_cards: int
     ) -> float:
         """
-        Probability of getting at least one card of specified rarity from n boosters
+        Probability of getting m cards of specified rarity from n boosters
+        CAUTION: this does some approximations to avoid high calculation costs, works best for rare cards
         """
         ps = self.get_rates_for_card_set(card_set_name, rarity)
+
+        # p is the chances of getting at least one card of the specified rarity
         p = 0.0
         for i in range(1, 5):  # Assuming there are 5 cards in the booster
             p += ps[i]
-        return 1.0 - pow(1.0 - p, n_booster)
+
+        # Here we assume we only get one card max of the specified rarity for each booster
+        return (
+            math.comb(n_booster, m_cards)
+            * pow(p, m_cards)
+            * pow(1 - p, n_booster - m_cards)
+        )
