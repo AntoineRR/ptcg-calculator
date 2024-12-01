@@ -178,6 +178,358 @@
                             }
                         ]
                     ]
+                },
+                {
+                    "name": "mewtwo",
+                    "god_pack_rate": 0.05,
+                    "rates": [
+                        [
+                            {
+                                "rarity": "ONE",
+                                "rate": 100.0
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE",
+                                "rate": 100.0
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE",
+                                "rate": 100.0
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "TWO",
+                                "rate": 90.0
+                            },
+                            {
+                                "rarity": "THREE",
+                                "rate": 5.0
+                            },
+                            {
+                                "rarity": "FOUR",
+                                "rate": 1.666
+                            },
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 2.572
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 0.5
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 0.222
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 0.04
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "TWO",
+                                "rate": 60.0
+                            },
+                            {
+                                "rarity": "THREE",
+                                "rate": 20.0
+                            },
+                            {
+                                "rarity": "FOUR",
+                                "rate": 6.664
+                            },
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 10.288
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 2.0
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 0.888
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 0.16
+                            }
+                        ]
+                    ],
+                    "god_rates": [
+                        [
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 42.105
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 47.368
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 5.263
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 5.263
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 42.105
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 47.368
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 5.263
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 5.263
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 42.105
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 47.368
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 5.263
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 5.263
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 42.105
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 47.368
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 5.263
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 5.263
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 42.105
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 47.368
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 5.263
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 5.263
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "name": "pikachu",
+                    "god_pack_rate": 0.05,
+                    "rates": [
+                        [
+                            {
+                                "rarity": "ONE",
+                                "rate": 100.0
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE",
+                                "rate": 100.0
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE",
+                                "rate": 100.0
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "TWO",
+                                "rate": 90.0
+                            },
+                            {
+                                "rarity": "THREE",
+                                "rate": 5.0
+                            },
+                            {
+                                "rarity": "FOUR",
+                                "rate": 1.666
+                            },
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 2.572
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 0.5
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 0.222
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 0.04
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "TWO",
+                                "rate": 60.0
+                            },
+                            {
+                                "rarity": "THREE",
+                                "rate": 20.0
+                            },
+                            {
+                                "rarity": "FOUR",
+                                "rate": 6.664
+                            },
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 10.288
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 2.0
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 0.888
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 0.16
+                            }
+                        ]
+                    ],
+                    "god_rates": [
+                        [
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 40.0
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 50.0
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 5.0
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 5.0
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 40.0
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 50.0
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 5.0
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 5.0
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 40.0
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 50.0
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 5.0
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 5.0
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 40.0
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 50.0
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 5.0
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 5.0
+                            }
+                        ],
+                        [
+                            {
+                                "rarity": "ONE_STAR",
+                                "rate": 40.0
+                            },
+                            {
+                                "rarity": "TWO_STARS",
+                                "rate": 50.0
+                            },
+                            {
+                                "rarity": "THREE_STARS",
+                                "rate": 5.0
+                            },
+                            {
+                                "rarity": "CROWN",
+                                "rate": 5.0
+                            }
+                        ]
+                    ]
                 }
             ]
         }
